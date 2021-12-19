@@ -18,10 +18,15 @@ namespace parser
         try
         {
             // json received = R"({"rgb":[0,0,255,0,0,255,0,0,255,0,0,255],"depth":"","time":"0"})"_json;
+            cout << "rgb base64 -> " << input.size() << '\n';
             json received = json::parse(input);
             auto jpg_binary_base64 = received["rgb"].get<std::string>();
             auto depth_binary_base64 = received["depth"].get<std::string>();
             ts = received["time"].get<long>();
+            if (ts == 0)
+            {
+                return;
+            }
             // Mat M(1, rgb_array.size(), CV_8UC1, rgb_array.data());
             // M.copyTo(rgb);
             rgb = Base2Mat(jpg_binary_base64);
@@ -29,11 +34,6 @@ namespace parser
             cout << "rgb base64 -> " << jpg_binary_base64.size() << '\n'
                  << "depth base64 -> " << depth_binary_base64.size() << '\n'
                  << "ts -> " << ts << '\n';
-            // cv::imshow("123", img);
-            // auto img2 = cv::imread("./cv/apple.jpg");
-            // cv::imshow("123", img2);
-
-            // cv::waitKey(0);
         }
         catch (const std::exception &e)
         {
