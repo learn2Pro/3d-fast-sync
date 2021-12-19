@@ -39,4 +39,5 @@
 - serving端采集图像并提供http服务
   1. docker run -it -v /c/Users/admin/Desktop/3d-fast-sync:/usr/local/export/3d-fast-sync -p 192.168.1.65:15000:5000 -p 127.0.0.1:15000:5000 3ddfa:v2
   2. cd /usr/local/export/3d-fast-sync/python/face
-  3. python3 app.py
+  3. 差机器：python3 app.py
+  4. 好机器： gunicorn -w 4 -b 0.0.0.0:5000 app:app

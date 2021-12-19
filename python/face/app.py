@@ -11,6 +11,7 @@ import request_buffer
 import argparse
 from utils.tddfa_util import str2bool
 import gzip
+from concurrent.futures import ThreadPoolExecutor
 
 app = Flask(__name__)
 
@@ -36,7 +37,11 @@ def activate_job():
         args = parser.parse_args(["--onnx", "-o", "depth"])
         demo_video_depth.main(args)
     thread = threading.Thread(target=run_job)
+    thread.setDaemon(True)
     thread.start()
+    # executor = ThreadPoolExecutor(max_workers=2)
+    # task = executor.submit(run_job)
+    # print(task.done())
 
 
 @app.route("/")
@@ -71,4 +76,4 @@ def recent_image():
         return content
 
 if __name__ == '__main__':
-    app.run(host = "0.0.0.0", port = 5000)
+    app.run(debug=False, host = "0.0.0.0", port = 5000, threaded=True)
