@@ -10,6 +10,7 @@ import demo_video_depth
 import request_buffer
 import argparse
 from utils.tddfa_util import str2bool
+import gzip
 
 app = Flask(__name__)
 
@@ -53,12 +54,21 @@ def recent_image():
     # response.headers['Content-Encoding'] = 'gzip'
     img, depth_img, ts = request_buffer.popHead()
     if(ts == 0):
+        # content = '''{"rgb":"%s","depth":"%s","time":%d}''' % ("", "", ts)
+        # response = make_response(gzip.compress(content.encode('utf-8'),5))
+        # response.headers['Content-length'] = len(content)
+        # response.headers['Content-Encoding'] = 'gzip'
+        # return response
         return '''{"rgb":"%s","depth":"%s","time":%d}''' % ("", "", ts)
     else:
         ser_image = base64.b64encode(cv2.imencode('.jpg', img)[1]).decode()
-        ser_depth_image = base64.b64encode(
-            cv2.imencode('.jpg', depth_img)[1]).decode()
-        return '''{"rgb":"%s","depth":"%s","time":%d}''' % (ser_image, ser_depth_image, ts)
+        ser_depth_image = base64.b64encode(cv2.imencode('.jpg', depth_img)[1]).decode()
+        content =  '''{"rgb":"%s","depth":"%s","time":%d}''' % (ser_image, ser_depth_image, ts)
+        # response = make_response(gzip.compress(content.encode('utf-8'),5))
+        # response.headers['Content-length'] = len(content)
+        # response.headers['Content-Encoding'] = 'gzip'
+        # return response
+        return content
 
 if __name__ == '__main__':
     app.run(host = "0.0.0.0", port = 5000)

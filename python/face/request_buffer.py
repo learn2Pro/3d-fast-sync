@@ -1,7 +1,7 @@
 import requests
+import time
 buffer = []
-max_len = 100
-
+max_len = 20
 
 def append(rgb, depth, ts):
     if(len(buffer) <= max_len):
@@ -9,7 +9,9 @@ def append(rgb, depth, ts):
             len(rgb), len(depth), ts))
         buffer.append((rgb, depth, ts))
     # else:
-    #     print('''===========>exceed the buffer max length,skip===========>''')
+    #     buffer.pop(0)
+    else:
+        print('''===========>exceed the buffer max length,skip===========>''')
 
 def popHead():
     if len(buffer)==0:
