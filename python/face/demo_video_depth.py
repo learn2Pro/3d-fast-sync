@@ -88,6 +88,7 @@ def main(args):
         n = len(boxes)
         if n != 0:
             # print(f'Detect {n} faces')
+            ts = time.time() * 1000
             param_lst, roi_box_lst = tddfa(img, boxes)
             # Visualization and serialization
             dense_flag = args.opt in (
@@ -123,7 +124,7 @@ def main(args):
             # path2 = os.path.join(savepath, str(num) + '_depth.jpg')
             # cv2.imwrite(path1, img)
             # cv2.imwrite(path2, dep)
-            request_buffer.append(img, dep, time.time()*1000)
+            request_buffer.append(img, dep, ts)
             num = num + 1
 
         # result = {}

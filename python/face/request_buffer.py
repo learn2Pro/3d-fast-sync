@@ -1,21 +1,21 @@
 import requests
 import time
 buffer = []
-max_len = 20
+max_len = 5
 
 def append(rgb, depth, ts):
     if(len(buffer) <= max_len):
         print('''===========>apend image buffer in rgb size:%d,depth size:%d,ts:%d===========>''' % (
             len(rgb), len(depth), ts))
         buffer.append((rgb, depth, ts))
-    # else:
-    #     buffer.pop(0)
     else:
-        print('''===========>exceed the buffer max length,skip===========>''')
+        buffer.pop(0)
+    # else:
+    #     print('''===========>exceed the buffer max length,skip===========>''')
 
 def popHead():
     if len(buffer)==0:
-        return "","",0
+        return "", "", 0
     else:
         return buffer.pop(0)
 
