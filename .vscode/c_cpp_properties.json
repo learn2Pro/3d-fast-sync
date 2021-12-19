@@ -1,0 +1,36 @@
+{
+    "configurations": [
+        // {
+        //     "name": "Mac",
+        //     "includePath": [
+        //         "${workspaceFolder}/**",
+        //         "/usr/local/include"
+        //     ],
+        //     "defines": [],
+        //     "macFrameworkPath": [
+        //         "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        //     ],
+        //     "compilerPath": "/usr/bin/clang",
+        //     "cStandard": "c11",
+        //     "cppStandard": "c++11",
+        //     "intelliSenseMode": "clang-x64"
+        // },
+        {
+            "name": "GCC",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/tools/opencv/build/include",
+                "C:/tools/opencv/build/include/opencv",
+                "C:/tools/opencv/build/include/opencv2",
+                "C:/ProgramData/chocolatey/lib/curl/tools/curl-7.80.0-win64-mingw/include"
+            ],
+            "defines": ["_DEBUG", "UNICODE", "_UNICODE"],
+            "windowsSdkVersion": "10.0.18362.0",
+            "compilerPath": "C:/msys64/mingw64/bin/g++.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "windows-gcc-x64"
+          }
+    ],
+    "version": 4
+}

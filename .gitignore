@@ -1,0 +1,5 @@
+*dSYM*
+request_image
+__pycache__
+flask/
+*.exe

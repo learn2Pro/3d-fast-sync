@@ -1,0 +1,78 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        // {
+        //     "type": "shell",
+        //     "label": "clang++ build active file",
+        //     "command": "/usr/bin/clang++",
+        //     "args": [
+        //         "`pkg-config",
+        //         "--cflags",
+        //         "--libs",
+        //         "opencv4`",
+        //         "-lcurl",
+        //         "-std=c++11",
+        //         "-stdlib=libc++",
+        //         "-g",
+        //         "${file}",
+        //         "-o",
+        //         "${fileDirname}/${fileBasenameNoExtension}"
+        //     ],
+        //     "options": {
+        //         "cwd": "${workspaceFolder}"
+        //     },
+        //     "problemMatcher": [
+        //         "$gcc"
+        //     ],
+        //     "group": {
+        //         "kind": "build",
+        //         "isDefault": true
+        //     }
+        // },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe build active file",
+            "command": "C:/msys64/mingw64/bin/g++.exe",
+            "args": [
+                //  "`pkg-config",
+                // "--cflags",
+                // "--libs",
+                // "opencv4`",
+                "-I", "C:/ProgramData/chocolatey/lib/curl/tools/curl-7.80.0-win64-mingw/include",
+                "-I", "C:/tools/opencv/build/include",
+                "-I", "C:/tools/opencv/build/include/opencv",
+                "-I", "C:/tools/opencv/build/include/opencv2",
+                "-l", "libopencv_calib3d454",          // 后三位数字为opencv对应版本4.5.0
+                "-l", "libopencv_core454",
+                "-l", "libopencv_dnn454",
+                "-l", "libopencv_features2d454",
+                "-l", "libopencv_flann454",
+                "-l", "libopencv_gapi454",
+                "-l", "libopencv_highgui454",
+                "-l", "libopencv_imgcodecs454",
+                "-l", "libopencv_imgproc454",
+                "-l", "libopencv_ml454",
+                "-l", "libopencv_objdetect454",
+                "-l", "libopencv_photo454",
+                "-l", "libopencv_stitching454",
+                "-l", "libopencv_video454",
+　　　　　　　　　"-l", "libopencv_videoio454",    // 不加这个处理视频时VideoCapture会报错
+                "-std=c++11",
+                // "-stdlib=libc++",
+                "-g",
+                 "${file}",
+                  "-o",
+                   "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                ],
+            "options": {
+              "cwd": "${fileDirname}"
+            },
+            "problemMatcher": ["$gcc"],
+            "group": {
+              "kind": "build",
+              "isDefault": true
+            },
+            "detail": "compiler: C:/msys64/mingw64/bin/g++.exe"
+          }
+    ]
+}
