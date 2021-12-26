@@ -29,10 +29,7 @@
     2. linux `yum install python3`
     3. window `https://www.python.org/downloads/`
   - 进入python/ 文件夹
-    1. 安装python虚拟环境 `python3 -m venv flask`
-    2. 运行虚拟环境 `. flask/bin/activate`
-    3. 按照numpy,flask,cv2 `pip install numpy flask opencv-python`
-    4. 运行flask服务器环境 `export FLASK_APP=hello && flask run`
+    1. 进入docker `cd ./python/face && python3 app.py`
   - 替换图片
     1. rgb 图片为 apple2.jpg, 可以替换为自己要的图片，名字一样即可
     2. depth 图片为 apple.jpg, 可以替换为自己要的图片，名字一样即可
