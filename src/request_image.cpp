@@ -9,6 +9,7 @@
 #include <iterator>
 #include <queue>
 #include <deque>
+#include <tuple>
 
 #define CPPHTTPLIB_OPENSSL_SUPPORT
 
@@ -26,7 +27,8 @@ std::string request_url = "http:/" + host + ":" + port + "/recent/image";
 std::string rgb_window_name = "rgb";
 std::string depth_window_name = "depth";
 std::map<long, std::pair<cv::Mat, cv::Mat>> img_buffer_sort_of_ts;
-std::deque<std::pair<cv::Mat, cv::Mat>> img_queue;
+// std::deque<std::pair<cv::Mat, cv::Mat>> img_queue;
+std::deque<std::tuple<long, cv::Mat, cv::Mat>> img_queue;
 long max_buffer_size = 10;
 
 std::mutex mtx; // mutex insert to buffer
@@ -146,7 +148,7 @@ std::pair<int, long> doInsertToBuffer(const std::string &input)
         // lck.lock();
         // auto ans = img_buffer_sort_of_ts.insert(std::make_pair(ts, std::make_pair(rgb, depth))).second;
         // lck.unlock();
-        img_queue.push_back(std::make_pair(rgb, depth));
+        img_queue.push_back(std::make_tuple(ts, rgb, depth));
         if (img_queue.size() > max_buffer_size)
         {
             img_queue.pop_front();
@@ -194,6 +196,9 @@ void showImgFromBufferInMain()
             if (img_queue.size() > 0)
             {
                 auto p = img_queue[0];
+                long s = std::get<0>(p);
+                cv::Mat rgb = std::get<1>(p);
+                cv::Mat depth = std::get<2>(p);
                 cv::imshow(rgb_window_name, p.first);
                 cv::imshow(depth_window_name, p.second);
                 cv::waitKey(1);
